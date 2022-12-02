@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>MultiAngentHostageRescue</name>
+  <name>MultiAgentHostageRescue</name>
   <version>0.0.0</version>
-  <description>Multi Agent Hostage Search and Rescue System Using 20 Turtels</description>
+  <description>Multi Agent Hostage Search and Rescue System Using 20 turtlebots</description>
   <maintainer email="nmangla@umd.edu">naveen</maintainer>
   <license>Apache license 2.0</license>
 
