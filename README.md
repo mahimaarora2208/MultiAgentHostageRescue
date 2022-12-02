@@ -38,7 +38,7 @@ source ~/<your ROS2 installation>/opt/ros/galactic/setup.bash
 
 This project will be completed using AIP process with the involvement of 3 programmers using Pair-programming in turns. One of the programmer would be driver while other 2 would be navigator and design keeper. The detailed Product Backlog, Iteration Backlogs and Work Log are mentioned in the link given below :
 
-[Agile Iterative Process](https://docs.google.com/spreadsheets/d/1lvFBjKfvxlf-LXtopkBy3UAMlyQPi31W/edit?usp=sharing&ouid=106728747057946217321&rtpof=true&sd=true)  # TO-D0 Needs to be updated
+[Agile Iterative Process](https://docs.google.com/spreadsheets/d/1q81OENQQRdlFShR4wcxflBOyHls5yuyU/edit?usp=sharing&ouid=106728747057946217321&rtpof=true&sd=true)  # TO-D0 Needs to be updated
 
 ## Important Links
 
@@ -56,8 +56,8 @@ This project will be completed using AIP process with the involvement of 3 progr
 [Quad Chart](https://drive.google.com/file/d/1Q7Ae7BqAT_y9z2TzFeA78kWwCRC0aNpY/view?usp=share_link)
 
 ## Sprint Planning Notes
-The below link contains combined notes of sprint 1 and sprint 2.
-[Link](https://docs.google.com/document/d/1r_AImnCmMG55agtjQzNZ3n2YdrxkfY6n6iax4RRetbs/edit?usp=sharing) # TO-D0 Needs to be updated
+The below link contains combined notes of sprint 1.
+[Link](https://docs.google.com/document/d/1eXNISSYEkhZfuHLOKzZ1n7hsESNZ54MTIxZAkLqt3zA/edit?usp=sharing) # TO-D0 Needs to be updated
 
 
 ## Downloading Dependencies
