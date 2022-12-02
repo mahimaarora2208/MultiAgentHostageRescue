@@ -12,14 +12,25 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # uncomment the line when a copyright and license is not present in all source files
-  #set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # uncomment the line when this package is not in a git repo
-  #set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
+find_package(ament_cmake_gtest REQUIRED)
+find_package(ament_lint_auto REQUIRED)
+
+# the following lines skip linters
+set(ament_cmake_cppcheck_FOUND TRUE)
+set(ament_cmake_copyright_FOUND TRUE)
+set(ament_cmake_cpplint_FOUND TRUE)
+set(ament_cmake_flake8_FOUND TRUE)
+set(ament_cmake_uncrustify_FOUND TRUE)
+ament_lint_auto_find_test_dependencies()
+
+# Run all lint tests in package.xml except those listed above
+ament_lint_auto_find_test_dependencies()
+
+# Add a gtest executable
+set(TESTFILES
+  test/test.cpp)
+ament_add_gtest(${PROJECT_NAME}_test ${TESTFILES})
+ament_target_dependencies(${PROJECT_NAME}_test ${THIS_PACKAGE_INCLUDE_DEPENDS})
 endif()
 
 if (COVERAGE)
