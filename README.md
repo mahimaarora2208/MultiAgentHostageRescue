@@ -4,15 +4,12 @@
 [![Build Status](https://github.com/mahimaarora2208/HumanDetecterAndTracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/mahimaarora2208/HumanDetecterAndTracker//actions/workflows/build_and_coveralls.yml)
 [![Coverage Status](https://coveralls.io/repos/github/mahimaarora2208/HumanDetecterAndTracker/badge.png?branch=main)](https://coveralls.io/github/mahimaarora2208/HumanDetecterAndTracker?branch=main)
 ## Overview
-This project simulates a Multi-agent system for search and rescue missions where we use turtlebot3 package in ROS2 Galactic. Our multi-agent system consists of 2- robots that are each specialized for a certain task. 8 turtlebots will be simulated as threats, another 8 turtlebots will be specific to neutralizing these threats and 4 people will be simulated using Aruco markers. 
-desired location while avoiding threats(in this case also dynamic robots).
+This project simulates a Multi-agent system for search and rescue missions where we use turtlebot3 package in ROS2 Galactic. Our multi-agent system consists of 2- robots that are each specialized for a certain task. 8 turtlebots will be simulated as threats, another 8 turtlebots will be specific to neutralizing these threats and 4 people will be simulated using Aruco markers. The remaining 4 turtlebots will be used to rescue these 4 hostages.
 
-Four classes were implemented to achieve this objective, in which the master class is **Human-Detector**.
+## Final Project Team: Group 1
 
-## Team:Group 4
-
- - Mahima Arora - Driver (https://github.com/mahimaarora2208)
- - Naveen Mangla - Navigator (https://github.com/nvnmangla)
+ - Naveen Mangla - Driver (https://github.com/nvnmangla)
+ - Mahima Arora - Navigator (https://github.com/mahimaarora2208)
  - Abhinav Garg - Designer (https://github.com/15abhinavgarg)
 
 
@@ -24,30 +21,28 @@ This project will be completed using AIP process with the involvement of 3 progr
 
 ## Important Links
 
-[Phase 0 Proposal](https://drive.google.com/file/d/10hK7GmJcISf981nXX9E4CqcFHO8nGW70/view?usp=sharing)
+[Phase 0 Proposal](https://drive.google.com/file/d/1Q7Ae7BqAT_y9z2TzFeA78kWwCRC0aNpY/view?usp=share_link)
 
+[Phase 0 Video](https://drive.google.com/file/d/1j9FvWYJ_o5ee0BTNtfcTjndG6ISZVPU-/view)
 
-[Phase 0 Video](https://drive.google.com/file/d/1qjiJ8MVaANbqeYgCbcMmP3CATyp1pWou/view?usp=sharing)
+[Phase 1 Video]() 
 
-[Phase 1 Video](https://drive.google.com/file/d/1FNlZqDXzz6H9pJ2Tok4gB1hnIMF776Sp/view?usp=sharing)
+[UML Class Diagram Phase 0](https://drive.google.com/file/d/16ZB5cMJbd44Ys_4KVa8fdSBXSPN-JB1F/view?usp=sharing) # TO-D0 Needs to be updated
 
-[UML Class Diagram Phase 0](https://drive.google.com/file/d/16ZB5cMJbd44Ys_4KVa8fdSBXSPN-JB1F/view?usp=sharing)
+[Activity Diagram Phase 0](https://drive.google.com/file/d/1PFQ3R563C5RVZqSqUmu6HlybmQZDz23V/view?usp=sharing) # TO-D0 Needs to be updated
 
-[UML Class Diagram Phase 1](https://drive.google.com/file/d/1Ky4Y5SGkwsw3tudvV3qMJoQ9zC0JVxFh/view?usp=sharing)
-
-[UML Class Diagram Phase 2](https://drive.google.com/file/d/1glShZYrTTs4PfVRKWUgJwSy6m5da1fdX/view?usp=sharing)
-
-[Activity Diagram Phase 0](https://drive.google.com/file/d/1PFQ3R563C5RVZqSqUmu6HlybmQZDz23V/view?usp=sharing)
-
-[Quad Chart](https://drive.google.com/file/d/1kqztJTiyrLfmTfumVQuHahukdQgT3-xU/view?usp=sharing)
+[Quad Chart](https://drive.google.com/file/d/1Q7Ae7BqAT_y9z2TzFeA78kWwCRC0aNpY/view?usp=share_link)
 
 ## Sprint Planning Notes
 The below link contains combined notes of sprint 1 and sprint 2.
-[Link](https://docs.google.com/document/d/1r_AImnCmMG55agtjQzNZ3n2YdrxkfY6n6iax4RRetbs/edit?usp=sharing)
+[Link](https://docs.google.com/document/d/1r_AImnCmMG55agtjQzNZ3n2YdrxkfY6n6iax4RRetbs/edit?usp=sharing) # TO-D0 Needs to be updated
 
+
+# TO-D0 Needs to be updated Below this
 
 ## Downloading Dependencies
 The main dependency that needs to be downloaded is openCV 4.2 or above.
+
 
 ```
 # Installing Dependencies
