@@ -78,6 +78,17 @@ cmake ../opencv;make -j4
 sudo make install
 ```
 
+### ROS2 Run TESTS
+Run the following commands to test your test cases:
+```
+colcon build --packages-select MultiAgentHostageRescue
+source install/setup.bash
+colcon test --packages-select MultiAgentHostageRescue
+colcon test --event-handlers console_direct+ --packages-select MultiAgentHostageRescue 
+colcon test-result --test-result-base build/MultiAgentHostageRescue
+echo $?
+```
+
 ## To Generate and Check code coverage
 ```
 sudo apt-get install lcov
