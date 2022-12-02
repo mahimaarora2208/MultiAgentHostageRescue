@@ -50,6 +50,9 @@ This project will be completed using AIP process with the involvement of 3 progr
 
 [Activity Diagram Phase 0](https://drive.google.com/file/d/1A6i3RmnGnbHXjkOn1xPDj8RQZXLSRa0C/view?usp=share_link) 
 
+[UML Class Diagram Phase 1](https://drive.google.com/file/d/1JzUevGegXdIdqE3Zfjjsl4-EG7zrwGUV/view?usp=share_link)
+
+
 [Quad Chart](https://drive.google.com/file/d/1Q7Ae7BqAT_y9z2TzFeA78kWwCRC0aNpY/view?usp=share_link)
 
 ## Sprint Planning Notes
