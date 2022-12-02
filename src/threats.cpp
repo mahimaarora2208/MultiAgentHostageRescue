@@ -25,3 +25,12 @@ limitations under the License.
  * @copyright Copyright (c) 2022 Naveen Mangla
  */
 
+#include <threats.hpp>
+
+/**
+ * @brief Move threats to secure hostages
+ * 
+ */
+void Threats::move_threats(){
+    std::cout << "Threats are moving"<<std::endl;
+}

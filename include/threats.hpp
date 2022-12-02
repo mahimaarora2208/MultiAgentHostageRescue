@@ -22,17 +22,12 @@ limitations under the License.
  * 
  */
 # include <base.hpp> // for base class
-class Swat: public BaseClass {
-    private:
-        std::pair<const int, const int> base = std::make_pair(0,0); // base location
-        int threat_count; // number of threats remaining
+class Threats: public BaseClass {
+    
     
     public:
-        Swat() = default;
-        void move_to_target();  // move to target
-        void move_to_base();   // move to base
-        int get_threat_count(); // get threat count
-
-        // ! This is not complete
+        Threats() = default;
+        void move_threats();  // move threats
+        // TODO: Complete this class
 
 };
