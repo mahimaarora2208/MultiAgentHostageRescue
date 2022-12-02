@@ -46,12 +46,12 @@
 /**
  * @file test/main.cpp
  * @author Mahima Arora (marora1@umd.edu)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-12-01
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  * @section DESCRIPTION
  *
  *  Main file to run rostests
@@ -59,13 +59,13 @@
  *
  */
 #include <gtest/gtest.h>
-#include <rclcpp/rclcpp.h>
+// #include <rclcpp/rclcpp.h>
 
 int main(int argc, char** argv) {
-  rclcpp::init(argc, argv);
+  //   rclcpp::init(argc, argv);
   ::testing::InitGoogleTest(&argc, argv);
   int result = RUN_ALL_TESTS();
-  rclcpp::shutdown();
+  //   rclcpp::shutdown();
   std::cout << "DONE SHUTTING DOWN ROS" << std::endl;
   return result;
 }
