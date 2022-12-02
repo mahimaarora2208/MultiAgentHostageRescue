@@ -1,9 +1,11 @@
 # Final Project - Multi-Agent Hostage Rescue
-[![License: Apache License 2.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+---
 [![Build Status](https://github.com/mahimaarora2208/HumanDetecterAndTracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/mahimaarora2208/HumanDetecterAndTracker//actions/workflows/build_and_coveralls.yml)
 [![Coverage Status](https://coveralls.io/repos/github/mahimaarora2208/HumanDetecterAndTracker/badge.png?branch=main)](https://coveralls.io/github/mahimaarora2208/HumanDetecterAndTracker?branch=main)
 ## Overview
-This project aims to simulate a Hostage Search and Rescue mission using ROS2 Galactic. 
+This project simulates a Multi-agent system for search and rescue missions where we use turtlebot3 package in ROS2 Galactic. Our multi-agent system consists of 2- robots that are each specialized for a certain task. 8 turtlebots will be simulated as threats, another 8 turtlebots will be specific to neutralizing these threats and 4 people will be simulated using Aruco markers. 
+desired location while avoiding threats(in this case also dynamic robots).
 
 Four classes were implemented to achieve this objective, in which the master class is **Human-Detector**.
 
