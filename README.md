@@ -57,7 +57,7 @@ This project will be completed using AIP process with the involvement of 3 progr
 
 ## Sprint Planning Notes
 The below link contains combined notes of sprint 1.
-[Link](https://docs.google.com/document/d/1eXNISSYEkhZfuHLOKzZ1n7hsESNZ54MTIxZAkLqt3zA/edit?usp=sharing) # TO-D0 Needs to be updated
+[Link](https://docs.google.com/document/d/1eXNISSYEkhZfuHLOKzZ1n7hsESNZ54MTIxZAkLqt3zA/edit?usp=sharing)
 
 ## Downloading Dependencies
 The main dependency that needs to be downloaded is openCV 4.2 or above.
