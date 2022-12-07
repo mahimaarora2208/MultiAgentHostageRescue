@@ -30,7 +30,7 @@ limitations under the License.
 
 void Swat::callback() {
     auto message = TWIST();
-    message.linear.x =1;
+    message.linear.x =0;
     publisher_->publish(message);
     std::string fromFrameRel = target_frame_.c_str();
     std::string toFrameRel = "odom";

@@ -49,4 +49,15 @@ ament_target_dependencies(mahr rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ro
 install(TARGETS
   mahr
   DESTINATION lib/${PROJECT_NAME})
+
+# install launch files
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+install(DIRECTORY
+  worlds  
+  DESTINATION share/${PROJECT_NAME}/
+)
 ament_package()
