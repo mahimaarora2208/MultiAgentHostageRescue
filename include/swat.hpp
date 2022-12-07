@@ -27,7 +27,8 @@ limitations under the License.
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <tf2/LinearMath/Matrix3x3.h>
 #include <tf2/LinearMath/Quaternion.h>
-
+#include <tf2_ros/transform_listener.h>
+#include "tf2_ros/buffer.h"
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;
@@ -38,29 +39,28 @@ using TWIST = geometry_msgs::msg::Twist;
 class Swat : public rclcpp::Node {
  public:
   Swat() : Node("Swat_move"){
+    target_frame_ = this->declare_parameter<std::string>("target_frame", "base_footprint");
     auto pubTopicName = "cmd_vel";
     publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
-
-    // Publisher callback
     auto processCallback = std::bind(&Swat::callback, this);
-    timer_ = this->create_wall_timer(100ms, processCallback);};
+    timer_ = this->create_wall_timer(100ms, processCallback);
 
-    // auto subCallback = std::bind(&swat::subscribe_callback, this, _1);
-    // auto default_qos = rclcpp::QoS(rclcpp::SensorDataQoS());
-    
+    tf_buffer_ =
+      std::make_unique<tf2_ros::Buffer>(this->get_clock());
+    tf_listener_ =
+      std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    };
 
-  void callback() {
-    auto message = TWIST();
-    message.linear.x =1;
-    publisher_->publish(message);
-    RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+  void callback();
 
-  
-  }
-//   rclcpp::Subscription<LASER>::SharedPtr subscription_;
   rclcpp::Publisher<TWIST>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
-//   LASER laser_;           // laser message
-//   StateType state_;       // state
-//   int num_readings = 15;  // angle to check, -15 to 15
+
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
+  std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+  geometry_msgs::msg::Transform current_loc;
+  std::string target_frame_;
+  std::string from_frame_;
+
+
 };
