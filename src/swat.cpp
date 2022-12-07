@@ -26,25 +26,37 @@ limitations under the License.
  */
 
 #include <swat.hpp>
+#include <test.hpp>
 
 
-void Swat::move_to_base(){
-    std::cout<<"Move to base"<<std::endl;
-    // TODO: Inplementation Pending
-}
+
+// void Swat::move_to_base(){
+//     std::cout<<"Move to base"<<std::endl;
+//     // TODO: Inplementation Pending
+// }
 
 
-void Swat::move_to_target(){
-    std::cout<<"Move to target"<<std::endl;
-    // TODO: Inplementation Pending
-}
+// void Swat::move_to_target(){
+//     std::cout<<"Move to target"<<std::endl;
+//     // TODO: Inplementation Pending
+// }
 
-/**
- * @brief Provides counts for the number of threats remaining
- * 
- * @return int 
- */
-int Swat::get_threat_count(){
+// /**
+//  * @brief Provides counts for the number of threats remaining
+//  * 
+//  * @return int 
+//  */
+// int Swat::get_threat_count(){
     
-    return this->threat_count;
+//     return this->threat_count;
+// }
+
+
+int main(int argc, char *argv[])
+{
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<Swat>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+  return 0;
 }

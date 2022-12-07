@@ -20,17 +20,47 @@ limitations under the License.
  * @brief Swat class for swat bots
  * 
  */
-# include <base.hpp>
 
-class Swat: public BaseClass {
-    private:
-        std::pair<const int, const int> base = std::make_pair(0,0); // base location
-        int threat_count; // number of threats remaining
+#include <geometry_msgs/msg/twist.hpp>
+#include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/laser_scan.hpp>
+#include <tf2/LinearMath/Matrix3x3.h>
+#include <tf2/LinearMath/Quaternion.h>
+
+
+using std::placeholders::_1;
+using namespace std::chrono_literals;
+
+using LASER = sensor_msgs::msg::LaserScan;
+using TWIST = geometry_msgs::msg::Twist; 
+
+class Swat : public rclcpp::Node {
+ public:
+  Swat() : Node("Swat_move"){
+    auto pubTopicName = "cmd_vel";
+    publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
+
+    // Publisher callback
+    auto processCallback = std::bind(&Swat::callback, this);
+    timer_ = this->create_wall_timer(100ms, processCallback);};
+
+    // auto subCallback = std::bind(&swat::subscribe_callback, this, _1);
+    // auto default_qos = rclcpp::QoS(rclcpp::SensorDataQoS());
     
-    public:
-        Swat() = default;
-        void move_to_target();  // move to target
-        void move_to_base();   // move to base
-        int get_threat_count(); // get threat count
 
+  void callback() {
+    auto message = TWIST();
+    message.linear.x =1;
+    publisher_->publish(message);
+    RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+
+  
+  }
+//   rclcpp::Subscription<LASER>::SharedPtr subscription_;
+  rclcpp::Publisher<TWIST>::SharedPtr publisher_;
+  rclcpp::TimerBase::SharedPtr timer_;
+//   LASER laser_;           // laser message
+//   StateType state_;       // state
+//   int num_readings = 15;  // angle to check, -15 to 15
 };
