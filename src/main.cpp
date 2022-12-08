@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 
     rclcpp::executors::MultiThreadedExecutor exec;
     auto node = std::make_shared<BotController>("bot_controller", "robot");
+    rclcpp::spin(std::make_shared<Threats>());
     exec.add_node(node);
     exec.spin();
     rclcpp::shutdown();

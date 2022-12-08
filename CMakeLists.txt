@@ -32,11 +32,11 @@ find_package(ament_lint_auto REQUIRED)
 
 endif()
 
-# if (COVERAGE)
-#     include(CodeCoverage)
-#     set(LCOV_REMOVE_EXTRA "'*vendor/*'")
-#     setup_target_for_coverage(code_coverage test/cpp-test coverage)
-#     set(COVERAGE_SRCS base.hpp) 
+if (COVERAGE)
+    include(CodeCoverage)
+    set(LCOV_REMOVE_EXTRA "'*vendor/*'")
+    setup_target_for_coverage(code_coverage test/cpp-test coverage)
+    set(COVERAGE_SRCS base.hpp) 
 
     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
@@ -46,8 +46,13 @@ else()
 endif()
 add_executable(mahr src/swat.cpp)
 ament_target_dependencies(mahr rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros turtlebot3_gazebo)
+
+add_executable(threats src/threats.cpp)
+ament_target_dependencies(threats rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros turtlebot3_gazebo)
+
 install(TARGETS
   mahr
+  threats
   DESTINATION lib/${PROJECT_NAME})
 
 # install launch files

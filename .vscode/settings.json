@@ -60,7 +60,12 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "csetjmp": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cfenv": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
