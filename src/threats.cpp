@@ -32,9 +32,19 @@ limitations under the License.
  * 
  */
 void Threats::callback() {
-    auto message = TWIST();
-    message.angular.z = 0.1;
+    // Create the message to publish
+    auto message = STRING();
+
+    message.data = "Hello, world! " + std::to_string(count_++);
+    RCLCPP_INFO_STREAM(this->get_logger(),
+                       "Publishing: " << message.data.c_str() <<
+                       " " << function2(323));
+
+    // Publish the message
     publisher_->publish(message);
+    // auto message = TWIST();
+    // message.angular.z = 0.1;
+    // publisher_->publish(message);
        
     // std::string fromFrameRel = target_frame_.c_str();
     // std::string toFrameRel = "odom";
@@ -62,7 +72,7 @@ int main(int argc, char *argv[])
 {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<Threats>();
-  rclcpp::spin(node);
+  // rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;
 }
