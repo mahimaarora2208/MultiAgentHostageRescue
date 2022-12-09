@@ -24,10 +24,9 @@ limitations under the License.
 #pragma once
 
 #include <rclcpp/rclcpp.hpp>
+#include <rclcpp/logging.hpp>
 #include <geometry_msgs/msg/twist.hpp>
-#include <std_msgs/msg/bool.hpp>
-#include <geometry_msgs/msg/quaternion.hpp>
-#include <nav_msgs/msg/odometry.hpp>
+
 #include <string>
 #include "tf2/exceptions.h"
 #include "tf2_ros/transform_listener.h"
@@ -42,18 +41,19 @@ using TWIST = geometry_msgs::msg::Twist;
 
 class Threats: public rclcpp::Node {
     public:
-    Threats() : Node("threats_move") {
-    target_frame_ = this->declare_parameter<std::string>("target_frame", "base_footprint");
+    Threats() : Node("threats_move"), count_(0) {
+    // target_frame_ = this->declare_parameter<std::string>("target_frame", "base_footprint");
     auto pubTopicName = "cmd_vel";
     publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
     
+    // creates 10 hz timer and ties the callback function
     auto processCallback = std::bind(&Threats::callback, this);
     timer_ = this->create_wall_timer(100ms, processCallback);
 
-    tf_buffer_ =
-    std::make_unique<tf2_ros::Buffer>(this->get_clock());
-    tf_listener_ =
-    std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    // tf_buffer_ =
+    // std::make_unique<tf2_ros::Buffer>(this->get_clock());
+    // tf_listener_ =
+    // std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
     };
 
     void callback();
@@ -63,12 +63,14 @@ class Threats: public rclcpp::Node {
     ////////////////////////////////////////
     rclcpp::Publisher<TWIST>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
+    size_t count_;
+  
 
-    std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
-    std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
-    geometry_msgs::msg::Transform current_loc;
-    std::string target_frame_;
-    std::string from_frame_;
+    // std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
+    // std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+    // geometry_msgs::msg::Transform current_loc;
+    // std::string target_frame_;
+    // std::string from_frame_;
 
 };
     // 20 bots are controlled by controller
