@@ -49,7 +49,12 @@ jobs:
             $(. /etc/os-release && echo $UBUNTU_CODENAME) main" \
             | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
           sudo apt update
-          sudo apt install ros-galactic-ros-base python3-colcon-common-extensions lcov
+          sudo apt upgrade
+          sudo apt install ros-galactic-desktop
+          sudo apt install ros-galactic-ros-base
+          sudo apt install ros-dev-tools
+          source /opt/ros/galactic/setup.bash
+          sudo apt install python3-colcon-common-extensions
 
        # Install turtlebot3 packages
       - name: Install packages for turtlebot3_gazebo
