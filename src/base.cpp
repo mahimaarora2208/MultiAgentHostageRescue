@@ -21,14 +21,12 @@ limitations under the License.
  * @brief Functions discription for base class
  * @version 0.1
  * @date 2022-12-02
- * 
- * 
+ *
+ *
  */
-#include<base.hpp>
+#include <base.hpp>
 
-void BaseClass::terminate(){
-    
-    std::cout << "BaseClass::terminate()" << std::endl;
-    // TODO: implement this function
+void BaseClass::terminate() {
+  std::cout << "BaseClass::terminate()" << std::endl;
+  // TODO(Mahima Arora): implement this function
 }
-

@@ -1,2 +1,0 @@
-Invoking command in '/home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue -- -j8 -l8
-Invoked command in '/home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue -- -j8 -l8

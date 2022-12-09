@@ -18,27 +18,34 @@ find_package(tf2_ros REQUIRED)
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   geometry_msgs
   rclcpp
+  rclcpp_action
   nav_msgs
   tf2
   tf2_ros
   std_msgs
-  # turtlebot3_gazebo
 )
 include_directories(include)
 
 if(BUILD_TESTING)
 find_package(ament_cmake_gtest REQUIRED)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  # the following lines skip flake8 check
-  set(ament_cmake_flake8_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
+find_package(ament_lint_auto REQUIRED)
+
+# # the following lines skip linters
+# set(ament_cmake_cppcheck_FOUND TRUE)
+# set(ament_cmake_copyright_FOUND TRUE)
+# set(ament_cmake_cpplint_FOUND TRUE)
+# set(ament_cmake_flake8_FOUND TRUE)
+# set(ament_cmake_uncrustify_FOUND TRUE)
+
+# # Run all lint tests in package.xml except those listed above
+# ament_lint_auto_find_test_dependencies()
+
+# Add a gtest executable
+set(TESTFILES
+test/test.cpp)
+ament_add_gtest(${PROJECT_NAME}_test ${TESTFILES})
+ament_target_dependencies(${PROJECT_NAME}_test ${THIS_PACKAGE_INCLUDE_DEPENDS})
+
 endif()
 
 
@@ -72,11 +79,7 @@ install(TARGETS
 # install launch files
 install(DIRECTORY
   launch
-  DESTINATION share/${PROJECT_NAME}/
-)
-
-install(DIRECTORY
-  worlds  
+  worlds
   DESTINATION share/${PROJECT_NAME}/
 )
 
@@ -85,4 +88,5 @@ install(PROGRAMS      # want to make the file executable (ie. chmod a+x)
   scripts/generate_coverage_report.bash
   DESTINATION lib/${PROJECT_NAME})
 
+ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_package()

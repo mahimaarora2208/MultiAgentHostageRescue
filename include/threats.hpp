@@ -16,36 +16,36 @@ limitations under the License.
 
 */
 
-
 /**
  * @brief Threat class for threat bots
- * 
+ *
  */
 #pragma once
 
-#include <rclcpp/rclcpp.hpp>
-#include <rclcpp/logging.hpp>
+#include <base.hpp>  // for base class
 #include <geometry_msgs/msg/twist.hpp>
-
+#include <rclcpp/logging.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
+
 #include "tf2/exceptions.h"
-#include "tf2_ros/transform_listener.h"
 #include "tf2_ros/buffer.h"
-# include <base.hpp> // for base class
+#include "tf2_ros/transform_listener.h"
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;
 
 using LASER = sensor_msgs::msg::LaserScan;
-using TWIST = geometry_msgs::msg::Twist; 
+using TWIST = geometry_msgs::msg::Twist;
 
-class Threats: public rclcpp::Node {
-    public:
-    Threats() : Node("threats_move"), count_(0) {
-    // target_frame_ = this->declare_parameter<std::string>("target_frame", "base_footprint");
+class Threats : public rclcpp::Node {
+ public:
+  Threats() : Node("threats_move"), count_(0) {
+    // target_frame_ = this->declare_parameter<std::string>("target_frame",
+    // "base_footprint");
     auto pubTopicName = "cmd_vel";
     publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
-    
+
     // creates 10 hz timer and ties the callback function
     auto processCallback = std::bind(&Threats::callback, this);
     timer_ = this->create_wall_timer(100ms, processCallback);
@@ -54,27 +54,25 @@ class Threats: public rclcpp::Node {
     // std::make_unique<tf2_ros::Buffer>(this->get_clock());
     // tf_listener_ =
     // std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
-    };
+  };
 
-    void callback();
+  void callback();
 
-    ////////////////////////////////////////
-    // member variables
-    ////////////////////////////////////////
-    rclcpp::Publisher<TWIST>::SharedPtr publisher_;
-    rclcpp::TimerBase::SharedPtr timer_;
-    size_t count_;
-  
+  ////////////////////////////////////////
+  // member variables
+  ////////////////////////////////////////
+  rclcpp::Publisher<TWIST>::SharedPtr publisher_;
+  rclcpp::TimerBase::SharedPtr timer_;
+  size_t count_;
 
-    // std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
-    // std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
-    // geometry_msgs::msg::Transform current_loc;
-    // std::string target_frame_;
-    // std::string from_frame_;
-
+  // std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
+  // std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+  // geometry_msgs::msg::Transform current_loc;
+  // std::string target_frame_;
+  // std::string from_frame_;
 };
-    // 20 bots are controlled by controller
-    // 1. have control for each robot
-    // central controller tf frame - 20 published on tf frames
-    // dynamicsally pub their pose 
-    // give prefix /t1/cmd_vel --> remap 
+// 20 bots are controlled by controller
+// 1. have control for each robot
+// central controller tf frame - 20 published on tf frames
+// dynamicsally pub their pose
+// give prefix /t1/cmd_vel --> remap

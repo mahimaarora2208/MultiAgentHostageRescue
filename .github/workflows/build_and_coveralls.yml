@@ -65,7 +65,7 @@ jobs:
       - name: Check code sytle and error
         run: |
           source /opt/ros/galactic/setup.bash
-          colcon test --packages-select MultiAgentHostageRescue
+          c
           cat log/latest_test/MultiAgentHostageRescue/stdout_stderr.log
           colcon test-result --test-result-base build/MultiAgentHostageRescue/ # catch error
 
