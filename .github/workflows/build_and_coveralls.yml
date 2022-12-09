@@ -3,19 +3,21 @@
 # GitGub CI workflow syntax spec:
 #    https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 #
-# Coveralls example:
-#    https://github.com/marketplace/actions/coveralls-github-action
+# CodeCov github action setup:
+#    https://github.com/codecov/codecov-action
 #
+# CodeCov badge setup:
+#    https://docs.codecov.com/docs/status-badges
 ##############################################################################
 
 name: Build
 
 on:
-  # Triggered whenever push to the master branch
+  # Triggered whenever push to the main branch
   push:
     branches: [ "main" ]
 
-  # Triggered whenever a pull request is created on master
+  # Triggered whenever a pull request is created on main
   pull_request:
     branches: [ "main" ]
     types: [opened]
@@ -30,35 +32,53 @@ jobs:
     runs-on: ubuntu-20.04
     
     steps:
-      # We want to use GitHub CI checkout version 3 for checking out the branch
+      # We want to use GitHub CI checkout version 3 to check out our branch
       - uses: actions/checkout@v3
       
       # Install some system pacakges
-      - name: Install packages
-        run: sudo apt install -y lcov
-
-      # # Install dependencies
-      # - name: Install OpenCV
-      #   # run: sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config; sudo apt-get install libopencv-dev;sudo apt-get install libopencv-contrib-dev
-      #   run: cd;sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config;git clone https://github.com/opencv/opencv.git;mkdir -p build && cd build;cmake ../opencv;make -j4;sudo make install
-
-      # Run CMake to setup compilation flags
-      - name: Configure Coverage CMake 
-        run: cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -B ${{github.workspace}}/build 
+      - name: Install ROS 2 Galactic packages
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository universe
+          sudo apt update && sudo apt install curl
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key \
+            -o /usr/share/keyrings/ros-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) \
+            signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \
+            http://packages.ros.org/ros2/ubuntu \
+            $(. /etc/os-release && echo $UBUNTU_CODENAME) main" \
+            | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+          sudo apt update
+          sudo apt install ros-galactic-ros-base python3-colcon-common-extensions lcov
+      # Build for test coverage
+      - name: Configure CMake flags and build exectables
+        run: |
+          source /opt/ros/galactic/setup.bash
+          colcon build --cmake-args -DCOVERAGE=1 --packages-select MultiAgentHostageRescue
+          cat log/latest_build/MultiAgentHostageRescue/stdout_stderr.log
       
-      # Compile and executables
-      - name: Build Coverage
-        working-directory: ${{github.workspace}}/build
-        run: make
-
+      # Check c++ code (and others) for style and static coding errors
+      - name: Check code sytle and error
+        run: |
+          source /opt/ros/galactic/setup.bash
+          colcon test --packages-select MultiAgentHostageRescue
+          cat log/latest_test/MultiAgentHostageRescue/stdout_stderr.log
       # Run test suite and compute code coverage
       - name: Run Test Coverage
-        working-directory: ${{github.workspace}}/build
-        run: make code_coverage
+        run: |
+          source /opt/ros/galactic/setup.bash
+          source install/setup.bash
+          timeout 3 ros2 launch MultiAgentHostageRescue run_test.launch.py || true
+          ros2 run MultiAgentHostageRescue generate_coverage_report.bash
       
-      # Upload coverage result to Coverage.io 
-      - name: Upload result to Coveralls.io
-        uses: coverallsapp/github-action@1.1.3
+      # Upload coverage result to CodeCov
+      - name: Upload result to CodeCov
+        uses: codecov/codecov-action@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ${{github.workspace}}/build/coverage.info.cleaned
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ${{github.workspace}}/install/MultiAgentHostageRescue/lib/MultiAgentHostageRescue/coverage_cleaned.info
+          # flags: unittests # optional
+          # directory: ${{github.workspace}}/install/
+          # name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
