@@ -28,23 +28,41 @@ limitations under the License.
 #include <swat.hpp>
 
 
-void Swat::move_to_base(){
-    std::cout<<"Move to base"<<std::endl;
-    // TODO: Inplementation Pending
-}
-
-
-void Swat::move_to_target(){
-    std::cout<<"Move to target"<<std::endl;
-    // TODO: Inplementation Pending
-}
-
-/**
- * @brief Provides counts for the number of threats remaining
- * 
- * @return int 
- */
-int Swat::get_threat_count(){
+void Swat::callback() {
+    auto message = TWIST();
+    message.linear.x =0;
+    publisher_->publish(message);
+    std::string fromFrameRel = target_frame_.c_str();
+    std::string toFrameRel = "odom";
     
-    return this->threat_count;
+    try {
+          geometry_msgs::msg::TransformStamped t;
+          t = tf_buffer_->lookupTransform(
+            toFrameRel, fromFrameRel,
+            tf2::TimePointZero);
+            RCLCPP_INFO(this->get_logger(),"Transformation is %f",t.transform.translation.x);
+
+        } catch (const tf2::TransformException & ex) {
+          RCLCPP_INFO(
+            this->get_logger(), "Could not transform %s to %s: %s",
+            toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
+
+          return;
+        }
+   
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+    
+    // TODO: Transformations are not well defined 
+  }
+
+
+
+
+int main(int argc, char *argv[])
+{
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<Swat>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+  return 0;
 }
