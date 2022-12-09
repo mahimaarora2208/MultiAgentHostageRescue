@@ -1,0 +1,8 @@
+source;share/MultiAgentHostageRescue/hook/cmake_prefix_path.ps1
+source;share/MultiAgentHostageRescue/hook/cmake_prefix_path.dsv
+source;share/MultiAgentHostageRescue/hook/cmake_prefix_path.sh
+source;share/MultiAgentHostageRescue/local_setup.bash
+source;share/MultiAgentHostageRescue/local_setup.dsv
+source;share/MultiAgentHostageRescue/local_setup.ps1
+source;share/MultiAgentHostageRescue/local_setup.sh
+source;share/MultiAgentHostageRescue/local_setup.zsh

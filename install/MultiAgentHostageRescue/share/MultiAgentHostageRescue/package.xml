@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>MultiAgentHostageRescue</name>
+  <version>0.0.0</version>
+  <description>Multi Agent Hostage Search and Rescue System Using 20 Turtels</description>
+  <maintainer email="nmangla@umd.edu">Naveen Mangla</maintainer>
+  <maintainer email="agarg125@umd.edu">Abhinav Garg</maintainer>
+  <maintainer email="marora1@umd.edu">Mahima Arora</maintainer>
+
+  <license>Apache license 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+
+  <depend>rclcpp</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>std_msgs</depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
