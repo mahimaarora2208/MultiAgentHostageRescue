@@ -52,7 +52,7 @@ jobs:
           sudo apt install ros-galactic-ros-base
           source /opt/ros/galactic/setup.bash
           sudo apt install python3-colcon-common-extensions
-          
+
       # Build for test coverage
       - name: Configure CMake flags and build exectables
         run: |
@@ -71,7 +71,7 @@ jobs:
         run: |
           source /opt/ros/galactic/setup.bash
           source install/setup.bash
-          timeout 3 ros2 launch MultiAgentHostageRescue run_test.launch.py || true
+          timeout 3 ros2 launch MultiAgentHostageRescue threat.launch.py || true
           ros2 run MultiAgentHostageRescue generate_coverage_report.bash
       
       # Upload coverage result to CodeCov
