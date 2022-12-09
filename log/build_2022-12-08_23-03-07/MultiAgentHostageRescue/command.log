@@ -1,0 +1,2 @@
+Invoking command in '/home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue': /usr/bin/cmake /home/mahima/ros2_ws/src/MultiAgentHostageRescue -DCMAKE_INSTALL_PREFIX=/home/mahima/ros2_ws/src/MultiAgentHostageRescue/install/MultiAgentHostageRescue
+Invoked command in '/home/mahima/ros2_ws/src/MultiAgentHostageRescue/build/MultiAgentHostageRescue' returned '-2': /usr/bin/cmake /home/mahima/ros2_ws/src/MultiAgentHostageRescue -DCMAKE_INSTALL_PREFIX=/home/mahima/ros2_ws/src/MultiAgentHostageRescue/install/MultiAgentHostageRescue

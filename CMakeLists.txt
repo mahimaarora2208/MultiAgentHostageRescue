@@ -12,7 +12,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
-find_package(turtlebot3_gazebo REQUIRED)
+# find_package(turtlebot3_gazebo REQUIRED)
 
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
@@ -22,7 +22,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   tf2
   tf2_ros
   std_msgs
-  turtlebot3_gazebo
+  # turtlebot3_gazebo
 )
 include_directories(include)
 
@@ -37,18 +37,21 @@ if (COVERAGE)
     set(LCOV_REMOVE_EXTRA "'*vendor/*'")
     setup_target_for_coverage(code_coverage test/cpp-test coverage)
     set(COVERAGE_SRCS base.hpp) 
-
+    set(ARG_CONFIG_FILE "${PROJECT_SOURCE_DIR}/uncrustify_google_cpp_allman.cfg"
+    CACHE STRING "uncrustify config file")
     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 else()
     set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -g")
 endif()
+
+
 add_executable(mahr src/swat.cpp)
-ament_target_dependencies(mahr rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros turtlebot3_gazebo)
+ament_target_dependencies(mahr rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros)
 
 add_executable(threats src/threats.cpp)
-ament_target_dependencies(threats rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros turtlebot3_gazebo)
+ament_target_dependencies(threats rclcpp std_msgs geometry_msgs nav_msgs tf2 tf2_ros)
 
 install(TARGETS
   mahr
