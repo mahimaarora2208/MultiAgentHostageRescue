@@ -74,7 +74,7 @@ jobs:
           source install/setup.bash
           ros2 launch multi_agent_hostage_rescue run_test.launch.py
           find build/multi_agent_hostage_rescue/ | grep -E 'gcda' # catch error -- expect to see .gcda files
-          ros2 run multi_agent_hostage_rescue generate_coverage_report.bash
+          
       
       # Upload coverage result to CodeCov
       - name: Upload result to CodeCov
