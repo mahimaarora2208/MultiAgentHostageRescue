@@ -65,7 +65,6 @@ jobs:
       - name: Check code sytle and error
         run: |
           source /opt/ros/galactic/setup.bash
-          cat log/latest_test/multi_agent_hostage_rescue/stdout_stderr.log
           colcon test-result --test-result-base build/multi_agent_hostage_rescue/ # catch error
 
       # Run test suite and compute code coverage
