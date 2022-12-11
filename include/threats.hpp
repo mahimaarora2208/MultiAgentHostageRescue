@@ -1,20 +1,19 @@
-
 /*
-Copyright 2022 Mahima Arora
+   Copyright 2022 Mahima Arora
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 
-*/
+ */
 
 /**
  * @brief Threat class for threat bots
@@ -22,7 +21,7 @@ limitations under the License.
  */
 #pragma once
 
-#include <base.hpp>  // for base class
+#include <base.hpp> // for base class
 #include <geometry_msgs/msg/twist.hpp>
 #include <rclcpp/logging.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -39,11 +38,14 @@ using LASER = sensor_msgs::msg::LaserScan;
 using TWIST = geometry_msgs::msg::Twist;
 
 class Threats : public rclcpp::Node {
- public:
-  Threats() : Node("threats_move"), count_(0) {
+public:
+
+  Threats() : Node("threats_move"), count_(0)
+  {
     // target_frame_ = this->declare_parameter<std::string>("target_frame",
     // "base_footprint");
     auto pubTopicName = "cmd_vel";
+
     publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
 
     // creates 10 hz timer and ties the callback function
@@ -54,7 +56,7 @@ class Threats : public rclcpp::Node {
     // std::make_unique<tf2_ros::Buffer>(this->get_clock());
     // tf_listener_ =
     // std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
-  };
+  }
 
   void callback();
 
@@ -70,9 +72,9 @@ class Threats : public rclcpp::Node {
   // geometry_msgs::msg::Transform current_loc;
   // std::string target_frame_;
   // std::string from_frame_;
+  // 20 bots are controlled by controller
+  // 1. have control for each robot
+  // central controller tf frame - 20 published on tf frames
+  // dynamicsally pub their pose
+  // give prefix /t1/cmd_vel --> remap
 };
-// 20 bots are controlled by controller
-// 1. have control for each robot
-// central controller tf frame - 20 published on tf frames
-// dynamicsally pub their pose
-// give prefix /t1/cmd_vel --> remap

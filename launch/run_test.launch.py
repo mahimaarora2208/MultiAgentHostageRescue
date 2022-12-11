@@ -6,7 +6,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     my_node = Node(
-        package='MultiAgentHostageRescue',
+        package='multi_agent_hostage_rescue',
         executable='threats'
     )
 

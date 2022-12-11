@@ -20,7 +20,7 @@ def generate_launch_description():
     y_pose = LaunchConfiguration('y_pose', default='3.0')
 
     world = os.path.join(
-        get_package_share_directory('MultiAgentHostageRescue'),
+        get_package_share_directory('multi_agent_hostage_rescue'),
         'worlds',
         'final_world.world'
     )
@@ -55,7 +55,7 @@ def generate_launch_description():
         }.items()
     )
     declare_node = Node(
-                        package = "MultiAgentHostageRescue",
+                        package = "multi_agent_hostage_rescue",
                         executable = "mahr",
                         name = "mahr"
                                 )

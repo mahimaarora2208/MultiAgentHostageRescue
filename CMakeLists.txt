@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.8)
-project(MultiAgentHostageRescue)
+project(multi_agent_hostage_rescue)
+
+# clangd support
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+execute_process(COMMAND "rm" "-f" "${CMAKE_SOURCE_DIR}/compile_commands.json")
+execute_process(COMMAND "ln" "-s" "-r" "${CMAKE_BINARY_DIR}/compile_commands.json" "${CMAKE_SOURCE_DIR}/")
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -29,32 +34,25 @@ include_directories(include)
 if(BUILD_TESTING)
 find_package(ament_cmake_gtest REQUIRED)
 find_package(ament_lint_auto REQUIRED)
-
-# # the following lines skip linters
-# set(ament_cmake_cppcheck_FOUND TRUE)
-# set(ament_cmake_copyright_FOUND TRUE)
-# set(ament_cmake_cpplint_FOUND TRUE)
-# set(ament_cmake_flake8_FOUND TRUE)
-# set(ament_cmake_uncrustify_FOUND TRUE)
-
-# # Run all lint tests in package.xml except those listed above
-# ament_lint_auto_find_test_dependencies()
-
-# Add a gtest executable
-set(TESTFILES
-test/test.cpp)
-ament_add_gtest(${PROJECT_NAME}_test ${TESTFILES})
-ament_target_dependencies(${PROJECT_NAME}_test ${THIS_PACKAGE_INCLUDE_DEPENDS})
-
+# the following line skips the linter which checks for copyrights
+# comment the line when a copyright and license is added to all source files
+set(ament_cmake_copyright_FOUND TRUE)
+# the following line skips cpplint (only works in a git repo)
+# comment the line when this package is in a git repo and when
+# a copyright and license is added to all source files
+set(ament_cmake_cpplint_FOUND TRUE)
+# the following lines skip flake8 check
+set(ament_cmake_flake8_FOUND TRUE)
+ament_lint_auto_find_test_dependencies()
 endif()
 
 
-if (COVERAGE)
+if(COVERAGE)
     set(CMAKE_BUILD_TYPE "Debug")
     set(CMAKE_CXX_FLAGS "--coverage")
     set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE "ON")
     # setup_target_for_coverage(code_coverage test/cpp-test coverage)
-    # set(COVERAGE_SRCS base.hpp) 
+    # set(COVERAGE_SRCS base.hpp)
     set(ARG_CONFIG_FILE "${PROJECT_SOURCE_DIR}/uncrustify_google_cpp_allman.cfg"
     CACHE STRING "uncrustify config file")
 #     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
@@ -79,6 +77,10 @@ install(TARGETS
 # install launch files
 install(DIRECTORY
   launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+install(DIRECTORY
   worlds
   DESTINATION share/${PROJECT_NAME}/
 )
@@ -88,5 +90,4 @@ install(PROGRAMS      # want to make the file executable (ie. chmod a+x)
   scripts/generate_coverage_report.bash
   DESTINATION lib/${PROJECT_NAME})
 
-ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_package()
