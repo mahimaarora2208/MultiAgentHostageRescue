@@ -80,8 +80,8 @@ jobs:
       - name: Generate test coverage report
         run: |
           source install/setup.bash
-          ros2 run cpp_pubsub generate_coverage_report.bash
-          
+          ros2 run multi_agent_hostage_rescue generate_coverage_report.bash
+
       # Upload coverage result to CodeCov
       - name: Upload coverage result to CodeCov
         uses: codecov/codecov-action@v3
