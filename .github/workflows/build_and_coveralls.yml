@@ -52,6 +52,7 @@ jobs:
           sudo apt update
           sudo apt install ros-galactic-ros-base
           sudo apt install python3-colcon-common-extensions
+          sudo apt install -y lcov
           
       # Build for test coverage
       - name: Configure CMake flags and build exectables
@@ -77,7 +78,7 @@ jobs:
           
       
       # Upload coverage result to CodeCov
-      - name: Upload result to CodeCov
+      - name: Upload coverage result to CodeCov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
