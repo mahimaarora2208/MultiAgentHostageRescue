@@ -54,7 +54,6 @@ This project will be completed using AIP process with the involvement of 3 progr
 
 [Quad Chart](https://drive.google.com/file/d/1Q7Ae7BqAT_y9z2TzFeA78kWwCRC0aNpY/view?usp=share_link)
 
-##Test here##
 ## Sprint Planning Notes
 The below link contains combined notes of sprint 1.
 [Link](https://docs.google.com/document/d/1eXNISSYEkhZfuHLOKzZ1n7hsESNZ54MTIxZAkLqt3zA/edit?usp=sharing)
