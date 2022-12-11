@@ -61,21 +61,27 @@ jobs:
           colcon build --cmake-args -DCOVERAGE=1 --packages-select multi_agent_hostage_rescue
           cat log/latest_build/multi_agent_hostage_rescue/stdout_stderr.log
           find build/multi_agent_hostage_rescue/ | grep -E 'gcno' # catch error -- exepct to see .gcno files    
-
-      # Run unit test and also check c++ code (and others) for style and static coding errors
-      - name: Run unit test and check code error
+     
+      # Check c++ code (and others) for style and static coding errors
+      - name: Check code sytle and error
         run: |
           source /opt/ros/galactic/setup.bash
-          colcon test --packages-select multi_agent_hostage_rescue
-          find build/multi_agent_hostage_rescue/ | grep -E 'gcda' # catch error -- expect to see .gcda files
           colcon test-result --test-result-base build/multi_agent_hostage_rescue/ # catch error
 
+      # Run test suite and compute code coverage
+      - name: Run Test Coverage
+        run: |
+          source /opt/ros/galactic/setup.bash
+          source install/setup.bash
+          ros2 launch multi_agent_hostage_rescue run_test.launch.py
+          find build/multi_agent_hostage_rescue/ | grep -E 'gcda' # catch error -- expect to see .gcda files
+          
       # Generate code coverage test report
       - name: Generate test coverage report
         run: |
           source install/setup.bash
-          ros2 run multi_agent_hostage_rescue generate_coverage_report.bash
-
+          ros2 run cpp_pubsub generate_coverage_report.bash
+          
       # Upload coverage result to CodeCov
       - name: Upload coverage result to CodeCov
         uses: codecov/codecov-action@v3
