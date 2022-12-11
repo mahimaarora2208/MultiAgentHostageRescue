@@ -33,20 +33,17 @@
  *
  */
 
-class BaseClass {
+class BaseClass
+{
 private:
-
-  std::pair<const int, const int>goal1 = std::make_pair(0, 0); // goal1
-  std::pair<const int, const int>goal2 = std::make_pair(0, 0); // goal2
-  std::pair<const int, const int>goal3 = std::make_pair(0, 0); // goal3
-  std::pair<const int, const int>goal4 = std::make_pair(0, 0); // goal4
-
-  std::vector<std::pair<const int, const int> >goals = {
-    goal1, goal2, goal3, goal4 };                              // vector of
-                                                               // goals
+  std::pair<const int, const int> goal1 = std::make_pair(0, 0); // goal1
+  std::pair<const int, const int> goal2 = std::make_pair(0, 0); // goal2
+  std::pair<const int, const int> goal3 = std::make_pair(0, 0); // goal3
+  std::pair<const int, const int> goal4 = std::make_pair(0, 0); // goal4
+  std::vector<std::pair<const int, const int>> goals = {
+    goal1, goal2, goal3, goal4}; // vector of goals
 
 public:
-
   BaseClass() = default; // Constructor
   void terminate();      // terminator
 };

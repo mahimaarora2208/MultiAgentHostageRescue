@@ -39,8 +39,7 @@ void Threats::callback()
   publisher_->publish(message);
   count_++;
 
-  if (count_ > 3)
-    exit(EXIT_SUCCESS);
+  if (count_ > 3) {exit(EXIT_SUCCESS);}
 
   // std::string fromFrameRel = target_frame_.c_str();
   // std::string toFrameRel = "odom";
@@ -65,7 +64,7 @@ void Threats::callback()
   // TODO(Mahima Arora): Transformations are not well defined
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<Threats>();

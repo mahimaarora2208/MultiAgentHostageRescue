@@ -41,10 +41,11 @@ using namespace std::chrono_literals;
 using LASER = sensor_msgs::msg::LaserScan;
 using TWIST = geometry_msgs::msg::Twist;
 
-class Swat : public rclcpp::Node {
+class Swat : public rclcpp::Node
+{
 public:
-
-  Swat() : Node("Swat_move")
+  Swat()
+  : Node("Swat_move")
   {
     target_frame_ =
       this->declare_parameter<std::string>("target_frame", "base_footprint");
@@ -53,17 +54,14 @@ public:
     auto processCallback = std::bind(&Swat::callback, this);
     timer_ = this->create_wall_timer(100ms, processCallback);
 
-    tf_buffer_   = std::make_unique<tf2_ros::Buffer>(this->get_clock());
+    tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
   }
-
   void callback();
-
   rclcpp::Publisher<TWIST>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
-
-  std::shared_ptr<tf2_ros::TransformListener>tf_listener_{ nullptr };
-  std::unique_ptr<tf2_ros::Buffer>tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_{nullptr};
+  std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
   geometry_msgs::msg::Transform current_loc;
   std::string target_frame_;
   std::string from_frame_;

@@ -34,17 +34,20 @@ void Swat::callback()
   message.linear.x = 0;
   publisher_->publish(message);
   std::string fromFrameRel = target_frame_.c_str();
-  std::string toFrameRel   = "odom";
+  std::string toFrameRel = "odom";
 
   try {
     geometry_msgs::msg::TransformStamped t;
-    t = tf_buffer_->lookupTransform(toFrameRel, fromFrameRel,
-                                    tf2::TimePointZero);
-    RCLCPP_INFO(this->get_logger(), "Transformation is %f",
-                t.transform.translation.x);
-  } catch (const tf2::TransformException& ex) {
-    RCLCPP_INFO(this->get_logger(), "Could not transform %s to %s: %s",
-                toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
+    t = tf_buffer_->lookupTransform(
+      toFrameRel, fromFrameRel,
+      tf2::TimePointZero);
+    RCLCPP_INFO(
+      this->get_logger(), "Transformation is %f",
+      t.transform.translation.x);
+  } catch (const tf2::TransformException & ex) {
+    RCLCPP_INFO(
+      this->get_logger(), "Could not transform %s to %s: %s",
+      toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
 
     return;
   }
@@ -53,7 +56,7 @@ void Swat::callback()
   // TODO(Mahima Arora): Transformations are not well defined
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<Swat>();

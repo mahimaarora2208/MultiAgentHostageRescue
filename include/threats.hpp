@@ -37,21 +37,19 @@ using namespace std::chrono_literals;
 using LASER = sensor_msgs::msg::LaserScan;
 using TWIST = geometry_msgs::msg::Twist;
 
-class Threats : public rclcpp::Node {
+class Threats : public rclcpp::Node
+{
 public:
-
-  Threats() : Node("threats_move"), count_(0)
+  Threats()
+  : Node("threats_move"), count_(0)
   {
     // target_frame_ = this->declare_parameter<std::string>("target_frame",
     // "base_footprint");
     auto pubTopicName = "cmd_vel";
-
     publisher_ = this->create_publisher<TWIST>(pubTopicName, 10);
-
     // creates 10 hz timer and ties the callback function
     auto processCallback = std::bind(&Threats::callback, this);
     timer_ = this->create_wall_timer(100ms, processCallback);
-
     // tf_buffer_ =
     // std::make_unique<tf2_ros::Buffer>(this->get_clock());
     // tf_listener_ =

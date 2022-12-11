@@ -65,7 +65,8 @@
         "compare": "cpp",
         "concepts": "cpp",
         "cfenv": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "numbers": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
