@@ -31,40 +31,60 @@
  * @brief Move threats to secure hostages
  *
  */
+
+size_t temp = 500; 
+size_t cycle = 0;
 void Threats::callback()
 {
   auto message = TWIST();
-  if (count_ < 10)
-  {
-    message.linear.x = 0.1;
-    publisher_->publish(message);
-    RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+  if (cycle == 3){
+    exit(EXIT_SUCCESS);
   }
-
-  if (count_>= 10 && count_< 20)
+  else
   {
-    message.linear.x = 0.0;
-    publisher_->publish(message); 
-    RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
-  }
-  
-  if (count_>= 20 && count_< 30)
-  {
-    message.linear.x = -0.1;
-    publisher_->publish(message); 
-    RCLCPP_INFO_STREAM(this->get_logger(), "State = BACKWARD");
-  }
+    if (count_ < temp)
+    {
+      message.linear.x = 0.0;
+      publisher_->publish(message);
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+    }
 
-  if (count_>= 30 && count_<= 40)
-  {
-    message.linear.x = 0;
-    publisher_->publish(message); 
-    RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+    else if (count_ < 1.5*temp)
+    {
+      message.linear.x = 0.1;
+      publisher_->publish(message);
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+    }
+
+    else if (count_ < 1.75*temp)
+    {
+      message.linear.x = 0.0;
+      publisher_->publish(message); 
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+    }
+    
+    else if (count_< 2.25*temp)
+    {
+      message.linear.x = -0.1;
+      publisher_->publish(message); 
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = BACKWARD");
+    }
+
+    else if (count_ < 2.5*temp)
+    {
+      message.linear.x = 0;
+      publisher_->publish(message); 
+      RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+    }
+
+    else if (count_ > 2.5*temp) 
+    {
+      count_ = 0;
+      cycle++;
+    }
+    count_++;
   }
-
-  if (count_ > 40) {exit(EXIT_SUCCESS);}
-  count_++;
-
+ 
   // std::string fromFrameRel = target_frame_.c_str();
   // std::string toFrameRel = "odom";
   //   try {
