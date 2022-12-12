@@ -7,7 +7,8 @@ def generate_launch_description():
 
     my_node = Node(
         package='multi_agent_hostage_rescue',
-        executable='threats'
+        executable='threats',
+        namespace='t1'
     )
 
     ld.add_action(my_node)
