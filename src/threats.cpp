@@ -38,72 +38,60 @@ void Threats::callback()
 {
   auto message = TWIST();
   if (cycle == 3){
+    message.linear.x = 0.0;
+    publisher_->publish(message);
     exit(EXIT_SUCCESS);
+
   }
   else
   {
-    if (count_ < temp)
+    if (count_ < temp) // 500
     {
       message.linear.x = 0.0;
       publisher_->publish(message);
       RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+      RCLCPP_INFO(
+      this->get_logger(), "Count %f", double(count_));
+      RCLCPP_INFO(
+      this->get_logger(), "Cycle %f", double(cycle));
     }
 
-    else if (count_ < 1.5*temp)
+    else if (count_ < 1.5*temp) // 750
     {
       message.linear.x = 0.1;
       publisher_->publish(message);
       RCLCPP_INFO_STREAM(this->get_logger(), "State = FORWARD");
+      RCLCPP_INFO(
+      this->get_logger(), "Count %f", double(count_));
     }
 
-    else if (count_ < 1.75*temp)
+    else if (count_ < 1.55*temp) // 775
     {
       message.linear.x = 0.0;
       publisher_->publish(message); 
       RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
+      RCLCPP_INFO(
+      this->get_logger(), "Count %f", double(count_));
     }
     
-    else if (count_< 2.25*temp)
+    else if (count_< 2.05*temp) // 1025
     {
       message.linear.x = -0.1;
       publisher_->publish(message); 
       RCLCPP_INFO_STREAM(this->get_logger(), "State = BACKWARD");
+      RCLCPP_INFO(
+      this->get_logger(), "Count %f", double(count_));
     }
 
-    else if (count_ < 2.5*temp)
+    else if (count_ < 2.1*temp) // 1050
     {
-      message.linear.x = 0;
-      publisher_->publish(message); 
-      RCLCPP_INFO_STREAM(this->get_logger(), "State = STOP");
-    }
-
-    else if (count_ > 2.5*temp) 
-    {
-      count_ = 0;
+      count_ = 450;
       cycle++;
     }
+
     count_++;
-  }
- 
-  // std::string fromFrameRel = target_frame_.c_str();
-  // std::string toFrameRel = "odom";
-  //   try {
-  //       geometry_msgs::msg::TransformStamped t;
-  //       t = tf_buffer_->lookupTransform(
-  //         toFrameRel, fromFrameRel,
-  //         tf2::TimePointZero);
-  //         RCLCPP_INFO(this->get_logger(),"Transformation is
-  //         %f",t.transform.translation.x);
-
-  //     } catch (const tf2::TransformException & ex) {
-  //       RCLCPP_INFO(
-  //         this->get_logger(), "Could not transform %s to %s: %s",
-  //         toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
-
-  //       return;
-  //     }
-
   
+  }  
 
   // TODO(Mahima Arora): Transformations are not well defined
 }
